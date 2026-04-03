@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { transactions as initialData } from "../data/dummyData";
 
-export const AppContext = useContext();
+export const AppContext = createContext();
 
 export const AppProvider = ({children}) => {
     const [transactions, setTransactions] = useState(initialData);
