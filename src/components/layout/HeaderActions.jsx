@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import handleExportCSV from "../../utils/export";
 
 const HeaderActions = () => {
-  const { role, setRole } = useContext(AppContext);
+  const { role, setRole, transactions } = useContext(AppContext);
 
   return (
     <div>
@@ -11,7 +12,7 @@ const HeaderActions = () => {
         <option value="admin">Admin</option>
       </select>
 
-      <button>Download</button>
+      <button onClick={() => handleExportCSV(transactions)}>Export CSV</button>
     </div>
   );
 };
