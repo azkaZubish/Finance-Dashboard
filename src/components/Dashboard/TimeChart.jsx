@@ -11,24 +11,28 @@ import {
 } from "recharts";
 
 const TimeChart = () => {
-    const {transactions} = useContext(AppContext);
+  const { transactions } = useContext(AppContext);
 
-    const groupedData = {};
-    
-    transactions.forEach(t => {
-        if(!groupedData[t.date]){
-            groupedData[t.date] = {date: t.date, income:0, expense : 0}
-        }
+  const groupedData = {};
 
-        if(t.type === 'income'){
-            groupedData[t.date].income += t.amount;
-        }
-        else{
-            groupedData[t.date].expense += t.amount;
-        }
-    });
+  transactions.forEach(t => {
+    if (!groupedData[t.date]) {
+      groupedData[t.date] = { date: t.date, income: 0, expense: 0 }
+    }
 
-    const data = Object.values(groupedData);
+    if (t.type === 'income') {
+      groupedData[t.date].income += t.amount;
+    }
+    else {
+      groupedData[t.date].expense += t.amount;
+    }
+  });
+
+  const data = Object.values(groupedData);
+
+  if (data.length === 0) {
+    return <p>No data to display</p>;
+  }
 
   return (
     <div>

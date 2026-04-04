@@ -24,6 +24,15 @@ const TransactionModal = ({ onClose, editingTransaction }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!form.date || !form.amount || !form.category) {
+            alert("Please fill all fields");
+            return;
+        }
+        if (form.amount <= 0) {
+            alert("Amount must be greater than 0");
+            return;
+        }
+
         if (editingTransaction) {
             const updated = transactions.map(t => {
                 return t.id === editingTransaction.id
@@ -33,7 +42,7 @@ const TransactionModal = ({ onClose, editingTransaction }) => {
             setTransactions(updated)
         } else {
             const newTransaction = {
-                id: Date.now(),
+                id: Date.now() + Math.random(),
                 ...form,
                 amount: Number(form.amount),
             };

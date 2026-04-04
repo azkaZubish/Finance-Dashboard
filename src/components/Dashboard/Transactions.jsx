@@ -20,6 +20,8 @@ const Transactions = () => {
       ? filteredData
       : filteredData.filter((t) => t.type === typeFilter);
 
+  const isFiltering = search || typeFilter !== "all";
+
   const sortedData = [...typeFiltered].sort((a, b) => {
     if (sortOrder === "latest") {
       return new Date(b.date) - new Date(a.date);
@@ -29,6 +31,9 @@ const Transactions = () => {
   });
 
   const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Are you sure?");
+    if (!confirmDelete) return;
+
     const updated = transactions.filter((t) => t.id !== id);
     setTransactions(updated);
   };
@@ -57,11 +62,11 @@ const Transactions = () => {
         <option value="oldest">Oldest</option>
       </select>
 
-      {role === 'admin' && (
-        <button onClick={() => setShowModal(true)}>
-          Add Transaction
-        </button>
-      )}
+
+      <button onClick={() => setShowModal(true)} disabled={role !== "admin"}>
+        Add Transaction
+      </button>
+
 
       {showModal && (
         <TransactionModal onClose={() => {
@@ -73,24 +78,32 @@ const Transactions = () => {
       )}
 
       {/* List */}
-      <ul>
-        {sortedData.map((t) => (
-          <li key={t.id}>
-            {t.date} - {t.category} - ₹{t.amount} ({t.type})
-            {role === 'admin' && (
-              <>
-                <button onClick={() => {
-                  setEditingTransaction(t);
-                  setShowModal(true);
-                }}>
-                  Edit
-                </button>
-                <button onClick={() => handleDelete(t.id)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+      {sortedData.length === 0 ? (
+        <p>
+          {isFiltering
+            ? "No matching transactions"
+            : "No transactions available"}
+        </p>
+      ) :
+        <ul>
+          {sortedData.map((t) => (
+            <li key={t.id}>
+              {t.date} - {t.category} - ₹{t.amount} ({t.type})
+              {role === 'admin' && (
+                <>
+                  <button onClick={() => {
+                    setEditingTransaction(t);
+                    setShowModal(true);
+                  }}>
+                    Edit
+                  </button>
+                  <button onClick={() => handleDelete(t.id)}>Delete</button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      }
     </div>
   );
 };

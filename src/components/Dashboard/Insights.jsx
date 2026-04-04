@@ -17,18 +17,23 @@ const Insights = () => {
 
   let highestCategory = "";
   let max = 0;
+  let hasExpenses = false;
 
-  for (let key in expenseMap) {
-    if (expenseMap[key] > max) {
-      max = expenseMap[key];
-      highestCategory = key;
+  if (Object.keys(expenseMap).length > 0) {
+    hasExpenses = true;
+    for (let key in expenseMap) {
+      if (expenseMap[key] > max) {
+        max = expenseMap[key];
+        highestCategory = key;
+      }
     }
   }
+
 
   const monthlyData = {};
 
   transactions.forEach((t) => {
-    const month = t.date.slice(0, 7); // "2026-04"
+    const month = t.date.slice(0, 7);
 
     if (!monthlyData[month]) {
       monthlyData[month] = { income: 0, expense: 0 };
@@ -43,21 +48,40 @@ const Insights = () => {
 
   const months = Object.keys(monthlyData).sort();
 
-  const lastMonth = monthlyData[months[months.length - 1]];
-  const prevMonth = monthlyData[months[months.length - 2]];
+  let expenseChange = null;
+  const lastMonth = null;
+  const prevMonth = null;
+
+  if (months.length >= 2) {
+    lastMonth = monthlyData[months[months.length - 1]];
+    prevMonth = monthlyData[months[months.length - 2]];
+
+    if (prevMonth && lastMonth) {
+      expenseChange = lastMonth.expense - prevMonth.expense;
+    }
+
+  }
+
+  if (transactions.length === 0) {
+    return <p>No insights available</p>;
+  }
 
   return (
     <div>
       <h3>Insights</h3>
 
-      <p>Highest Spending Category: {highestCategory}</p>
+      <p>Highest Spending Category: {' '}
+        {hasExpenses ? highestCategory : 'No expense Data'}
+      </p>
 
-      {lastMonth && prevMonth && (
-        <p>
-          Expense Change: ₹
-          {lastMonth.expense - prevMonth.expense}
-        </p>
-      )}
+
+      <p>
+        Expense Change: {' '}
+        {expenseChange !== null
+          ? `₹${expenseChange}`
+          : 'Not enough data to display Expense Change'}
+      </p>
+
     </div>
   );
 };

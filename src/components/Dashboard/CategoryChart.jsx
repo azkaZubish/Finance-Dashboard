@@ -18,29 +18,35 @@ const CategoryChart = () => {
 
 
     const data = Object.keys(categoryData).map(key => {
-       return { name: key,
-        value: categoryData[key],}
+        return {
+            name: key,
+            value: categoryData[key],
+        }
     });
 
-     if (data.length === 0) {
-        return <div>No expense data available</div>;
-    }
+    // if (data.length === 0) {
+    //     return <div>No expense data available</div>;
+    // }
 
     return (
         <div style={{ width: "100%" }}>
             <h3>Category Based Visualization</h3>
-            <ResponsiveContainer width="100%" height={300}>
-                <PieChart>
-                    <Pie
-                        data={data}
-                        dataKey="value"
-                        nameKey="name"
-                        outerRadius={100}
-                    />
-                    <Tooltip />
-                    <Legend />
-                </PieChart>
-            </ResponsiveContainer>
+
+            {data.length === 0 ? 'No expense Data Available' : (
+                <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            dataKey="value"
+                            nameKey="name"
+                            outerRadius={100}
+                        />
+                        <Tooltip />
+                        <Legend />
+                    </PieChart>
+                </ResponsiveContainer>
+            )}
+
         </div>
     );
 };
