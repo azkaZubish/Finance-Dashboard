@@ -1,12 +1,15 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
+import TransactionModal from "./TransactionModal";
 
 const Transactions = () => {
-  const { transactions = [] } = useContext(AppContext);
+  const { transactions = [], role, setTransactions } = useContext(AppContext);
 
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [sortOrder, setSortOrder] = useState("latest");
+  const [showModal, setShowModal] = useState(false);
+  const [editingTransaction, setEditingTransaction] = useState(null);
 
   const filteredData = transactions.filter((t) =>
     t.category.toLowerCase().includes(search.toLowerCase())
@@ -24,6 +27,11 @@ const Transactions = () => {
       return new Date(a.date) - new Date(b.date);
     }
   });
+
+  const handleDelete = (id) => {
+    const updated = transactions.filter((t) => t.id !== id);
+    setTransactions(updated);
+  };
 
   return (
     <div>
@@ -49,11 +57,37 @@ const Transactions = () => {
         <option value="oldest">Oldest</option>
       </select>
 
+      {role === 'admin' && (
+        <button onClick={() => setShowModal(true)}>
+          Add Transaction
+        </button>
+      )}
+
+      {showModal && (
+        <TransactionModal onClose={() => {
+          setShowModal(false);
+          setEditingTransaction(null);
+        }}
+          editingTransaction={editingTransaction}
+        />
+      )}
+
       {/* List */}
       <ul>
         {sortedData.map((t) => (
           <li key={t.id}>
             {t.date} - {t.category} - ₹{t.amount} ({t.type})
+            {role === 'admin' && (
+              <>
+                <button onClick={() => {
+                  setEditingTransaction(t);
+                  setShowModal(true);
+                }}>
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(t.id)}>Delete</button>
+              </>
+            )}
           </li>
         ))}
       </ul>
