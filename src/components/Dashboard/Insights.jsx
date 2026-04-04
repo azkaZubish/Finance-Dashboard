@@ -3,7 +3,7 @@ import { AppContext } from "../../context/AppContext";
 
 const Insights = () => {
   const { transactions } = useContext(AppContext);
-
+ 
   return (
     <div>
       <h3>Insights</h3>

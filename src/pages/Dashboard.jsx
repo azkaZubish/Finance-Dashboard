@@ -7,6 +7,7 @@ import Transactions from "../components/dashboard/Transactions";
 import Insights from "../components/dashboard/Insights";
 
 const Dashboard = () => {
+  
   return (
     <div>
       <Navbar />
