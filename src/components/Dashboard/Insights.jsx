@@ -77,20 +77,24 @@ const Insights = () => {
   }
 
   return (
-    <div>
-      <h3>Insights</h3>
+    <div className="bg-white p-4 rounded-xl shadow-sm border">
+      <h3 className="font-semibold mb-2">Insights</h3>
 
-      <p>Highest Spending Category: {' '}
-        {hasExpenses ? highestCategory : 'No expense Data'}
-      </p>
+      <div className="space-y-2 text-sm">
+
+        <p>Highest Spending Category: {' '}
+          {hasExpenses ? highestCategory : 'No expense Data'}
+        </p>
 
 
-      <p>
-        Expense Change: {' '}
-        {expenseChange !== null
-          ? `₹${expenseChange}`
-          : 'Not enough data to display Expense Change'}
-      </p>
+        <p>
+          Expense Change: {' '}
+          {expenseChange !== null
+            ? `₹${expenseChange}`
+            : 'Not enough data to display Expense Change'}
+        </p>
+
+      </div>
 
     </div>
   );

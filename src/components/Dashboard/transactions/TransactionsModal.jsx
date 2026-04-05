@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext";
+import { AppContext } from "../../../context/AppContext";
 
 const TransactionModal = ({ onClose, editingTransaction }) => {
     const { transactions, setTransactions } = useContext(AppContext);
