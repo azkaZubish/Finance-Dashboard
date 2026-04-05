@@ -56,41 +56,43 @@ const Transactions = () => {
     };
 
     return (
-        <div className="bg-white p-4 rounded-xl shadow-sm border h-full flex flex-col">
-            <h3 className="font-semibold mb-3">Transactions</h3>
+        <div className="bg-gray border border-gray-200 rounded-2xl shadow-sm p-1  h-full flex flex-col">
+            <div className="bg-white border border-gray-100 rounded-xl p-4  flex flex-col h-full">
+                <h3 className="font-semibold text-gray-600 mb-4">Transactions</h3>
 
-            <div className="flex gap-3 mb-3">
-                <TransactionFilters
-                    search={search}
-                    setSearch={setSearch}
-                    typeFilter={typeFilter}
-                    setTypeFilter={setTypeFilter}
-                    sortOrder={sortOrder}
-                    setSortOrder={setSortOrder}
-                />
-                <button onClick={() => setShowModal(true)} disabled={role !== "admin"}>
-                    +
-                </button>
-            </div>
+                <div className="flex gap-3 mb-3">
+                    <TransactionFilters
+                        search={search}
+                        setSearch={setSearch}
+                        typeFilter={typeFilter}
+                        setTypeFilter={setTypeFilter}
+                        sortOrder={sortOrder}
+                        setSortOrder={setSortOrder}
+                    />
+                    <button onClick={() => setShowModal(true)} disabled={role !== "admin"} className="font-semibold border border-gray-200 px-2 py-2 rounded-lg text-sm">
+                        +
+                    </button>
+                </div>
 
 
-            {showModal && (
-                <TransactionModal
-                    onClose={() => {
-                        setShowModal(false);
-                        setEditingTransaction(null);
-                    }}
-                    editingTransaction={editingTransaction}
-                />
-            )}
-            <div className="flex-1 overflow-y-auto">
-                <TransactionList
-                    data={sortedData}
-                    role={role}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    isFiltering={isFiltering}
-                />
+                {showModal && (
+                    <TransactionModal
+                        onClose={() => {
+                            setShowModal(false);
+                            setEditingTransaction(null);
+                        }}
+                        editingTransaction={editingTransaction}
+                    />
+                )}
+                <div className="flex-1 overflow-y-auto mt-3 space-y-2">
+                    <TransactionList
+                        data={sortedData}
+                        role={role}
+                        onEdit={handleEdit}
+                        onDelete={handleDelete}
+                        isFiltering={isFiltering}
+                    />
+                </div>
             </div>
         </div>
     );

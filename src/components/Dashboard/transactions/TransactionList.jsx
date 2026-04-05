@@ -3,7 +3,7 @@ import TransactionItem from "./TransactionItem";
 const TransactionList = ({ data, role, onEdit, onDelete, isFiltering }) => {
   if (data.length === 0) {
     return (
-      <p>
+      <p  className="text-gray-500 text-sm text-center mt-6">
         {isFiltering
           ? "No matching transactions"
           : "No transactions available"}

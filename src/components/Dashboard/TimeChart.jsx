@@ -45,22 +45,24 @@ const TimeChart = () => {
   }
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm border">
-      <h3 className="text-sm text-gray-500 mb-2">
-        Time Based Visualization
-      </h3>
+    <div className="bg-gray border border-gray-200 rounded-2xl shadow-sm p-1">
+      <div className="bg-white border border-gray-100 rounded-xl p-4">
+        <h3 className="font-semibold text-gray-600 mb-4">
+          Time Based Visualization
+        </h3>
 
-      <div className="h-[300px]">
-        <LineChart width={500} height={300} data={data}>
-          <CartesianGrid />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
+        <div className="h-[300px]">
+          <LineChart width={500} height={300} data={data}>
+            <CartesianGrid />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
 
-          <Line type="monotone" dataKey="income" />
-          <Line type="monotone" dataKey="expense" />
-        </LineChart>
+            <Line type="monotone" dataKey="income" />
+            <Line type="monotone" dataKey="expense" />
+          </LineChart>
+        </div>
       </div>
     </div>
   );

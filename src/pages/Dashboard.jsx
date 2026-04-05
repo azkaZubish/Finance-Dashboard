@@ -9,26 +9,28 @@ import Insights from "../components/dashboard/Insights";
 const Dashboard = () => {
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="bg-[#F6F7FB] min-h-screen p-6">
+      <div className="flex min-h-screen bg-gray-50">
 
-      <div className="flex-1 p-6 space-y-6">
-        <Navbar />
-        <HeaderActions />
+        <div className="flex-1 p-6 space-y-6">
+          <Navbar />
+          <HeaderActions />
 
-        <SummaryCards />
+          <SummaryCards />
 
-        <div className="grid grid-cols-3 gap-6">
-          <div className="col-span-2">
-            <TimeChart />
+          <div className="grid grid-cols-3 gap-6">
+            <div className="col-span-2">
+              <TimeChart />
+            </div>
+            <div>
+              <Transactions />
+            </div>
           </div>
-          <div>
-            <Transactions />
-          </div>
-        </div>
 
-        <div className="grid grid-cols-2 gap-6">
-          <Insights />
-          <CategoryChart />
+          <div className="grid grid-cols-2 gap-6">
+            <Insights />
+            <CategoryChart />
+          </div>
         </div>
       </div>
     </div>

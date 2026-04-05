@@ -7,23 +7,24 @@ const TransactionFilters = ({
     setSortOrder,
 }) => {
     return (
-        <div>
+        <div className="flex gap-2">
             {/* Search */}
             <input
+                className="flex-1 border border-gray-200 px-3 py-2 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 outline-none"
                 placeholder="Search category..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
             />
 
             {/* Filter */}
-            <select onChange={(e) => setTypeFilter(e.target.value)}>
+            <select onChange={(e) => setTypeFilter(e.target.value)} className="border border-gray-200 px-2 py-2 rounded-lg text-sm">
                 <option value="all">All</option>
                 <option value="income">Income</option>
                 <option value="expense">Expense</option>
             </select>
 
             {/* Sort */}
-            <select onChange={(e) => setSortOrder(e.target.value)}>
+            <select onChange={(e) => setSortOrder(e.target.value)} className="border border-gray-200 px-2 py-2 rounded-lg text-sm">
                 <option value="latest">Latest</option>
                 <option value="oldest">Oldest</option>
             </select>
