@@ -59,8 +59,8 @@ const Insights = () => {
   const months = Object.keys(monthlyData).sort();
 
   let expenseChange = null;
-  const lastMonth = null;
-  const prevMonth = null;
+  let lastMonth = null;
+  let prevMonth = null;
 
   if (months.length >= 2) {
     lastMonth = monthlyData[months[months.length - 1]];
