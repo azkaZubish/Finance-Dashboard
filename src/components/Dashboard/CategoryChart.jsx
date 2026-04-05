@@ -3,11 +3,21 @@ import { AppContext } from "../../context/AppContext";
 import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const CategoryChart = () => {
-    const { transactions = [] } = useContext(AppContext);
+    const { transactions = [], globalSearch } = useContext(AppContext);
+
+    const globalFiltered = transactions.filter((t) => {
+        const query = globalSearch.toLowerCase();
+
+        return (
+            t.category.toLowerCase().includes(query) ||
+            t.type.toLowerCase().includes(query) ||
+            t.amount.toString().includes(query)
+        );
+    });
 
     const categoryData = {};
 
-    (transactions || []).forEach((t) => {
+    (globalFiltered).forEach((t) => {
         if (t.type === "expense") {
             if (!categoryData[t.category]) {
                 categoryData[t.category] = 0;

@@ -2,11 +2,21 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 const Insights = () => {
-  const { transactions } = useContext(AppContext);
+  const { transactions, globalSearch } = useContext(AppContext);
+
+  const globalFiltered = transactions.filter((t) => {
+    const query = globalSearch.toLowerCase();
+
+    return (
+      t.category.toLowerCase().includes(query) ||
+      t.type.toLowerCase().includes(query) ||
+      t.amount.toString().includes(query)
+    );
+  });
 
   const expenseMap = {};
 
-  transactions.forEach((t) => {
+  globalFiltered.forEach((t) => {
     if (t.type === "expense") {
       if (!expenseMap[t.category]) {
         expenseMap[t.category] = 0;

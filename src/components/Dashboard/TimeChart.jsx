@@ -11,11 +11,21 @@ import {
 } from "recharts";
 
 const TimeChart = () => {
-  const { transactions } = useContext(AppContext);
+  const { transactions, globalSearch } = useContext(AppContext);
+
+  const globalFiltered = transactions.filter((t) => {
+    const query = globalSearch.toLowerCase();
+
+    return (
+      t.category.toLowerCase().includes(query) ||
+      t.type.toLowerCase().includes(query) ||
+      t.amount.toString().includes(query)
+    );
+  });
 
   const groupedData = {};
 
-  transactions.forEach(t => {
+  globalFiltered.forEach(t => {
     if (!groupedData[t.date]) {
       groupedData[t.date] = { date: t.date, income: 0, expense: 0 }
     }

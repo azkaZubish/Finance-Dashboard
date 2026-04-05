@@ -3,7 +3,7 @@ import { AppContext } from "../../context/AppContext";
 import TransactionModal from "./TransactionModal";
 
 const Transactions = () => {
-  const { transactions = [], role, setTransactions } = useContext(AppContext);
+  const { transactions = [], role, setTransactions, globalSearch } = useContext(AppContext);
 
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
@@ -11,7 +11,17 @@ const Transactions = () => {
   const [showModal, setShowModal] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState(null);
 
-  const filteredData = transactions.filter((t) =>
+  const globalFiltered = transactions.filter((t) => {
+    const query = globalSearch.toLowerCase();
+
+    return (
+      t.category.toLowerCase().includes(query) ||
+      t.type.toLowerCase().includes(query) ||
+      t.amount.toString().includes(query)
+    );
+  });
+
+  const filteredData = globalFiltered.filter((t) =>
     t.category.toLowerCase().includes(search.toLowerCase())
   );
 

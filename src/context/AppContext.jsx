@@ -7,6 +7,7 @@ export const AppProvider = ({children}) => {
     const [transactions, setTransactions] = useState(initialData);
     const [role, setRole] = useState('viewer');
     const [filters, setFilters] = useState({});
+    const [globalSearch, setGlobalSearch] = useState("");
 
     return(
         <AppContext.Provider value = {{
@@ -16,6 +17,8 @@ export const AppProvider = ({children}) => {
             setRole,
             filters,
             setFilters,
+            globalSearch,
+            setGlobalSearch,
         }}>
             {children}
         </AppContext.Provider>
