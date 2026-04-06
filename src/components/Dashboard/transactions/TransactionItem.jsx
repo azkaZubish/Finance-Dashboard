@@ -8,11 +8,15 @@ const TransactionItem = ({ t, role, onEdit, onDelete }) => {
         const handleClickOutside = () => setShowMenu(false);
         window.addEventListener("click", handleClickOutside);
 
-        // return () => window.removeEventListener("click", handleClickOutside);
+        return () => window.removeEventListener("click", handleClickOutside);
     }, []);
 
     return (
-        <li className="flex justify-between items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition border border-transparent hover:border-gray-200">
+        <li className=" flex justify-between items-center gap-4 p-3 rounded-lg
+             border-b border-purple-500
+             hover:bg-gray-50
+             transition
+             hover:border hover:border-purple-400 mb-2">
 
             <div>
                 <p className="text-sm font-medium text-gray-800">

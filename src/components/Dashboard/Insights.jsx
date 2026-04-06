@@ -77,26 +77,61 @@ const Insights = () => {
   }
 
   return (
-    <div className="bg-gray border border-gray-200 rounded-2xl shadow-sm p-1">
-      <div className="bg-white border border-gray-100 rounded-xl p-4">
-        <h3 className="font-semibold text-gray-600 mb-4">Insights</h3>
-
-        <div className="space-y-2 text-sm">
-
-          <p>Highest Spending Category: {' '}
-            {hasExpenses ? highestCategory : 'No expense Data'}
-          </p>
+    <div className="bg-gray-100 border border-gray-200 rounded-2xl shadow-sm p-1 flex flex-col h-full ">
 
 
-          <p>
-            Expense Change: {' '}
-            {expenseChange !== null
-              ? `₹${expenseChange}`
-              : 'Not enough data to display Expense Change'}
-          </p>
+      <div className="bg-white border border-gray-100 rounded-xl p-2  sm:p-3 flex flex-col mb-1">
+
+        <h3 className="font-semibold text-gray-600 mb-3 sm:mb-4 text-sm sm:text-base">
+          Insights
+        </h3>
+      </div>
+      <div className="bg-white border border-gray-100 rounded-xl p-2 sm:p-3 flex flex-col flex-1">
+
+        <div className="flex flex-col flex-1 justify-between text-sm mt-1">
+
+          {/* Top Category */}
+          <div className="flex justify-between items-start p-3 rounded-lg hover:bg-gray-50 transition">
+            <div>
+              <p className="text-md text-gray-400 mb-1">Top Category</p>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-lg font-medium">
+                {hasExpenses ? highestCategory : "No data"}
+              </span>
+            </div>
+          </div>
+
+          {/* Expense Change */}
+          <div className="flex justify-between items-start p-3 rounded-lg hover:bg-gray-50 transition">
+            <div>
+              <p className="text-md text-gray-400 mb-1">Expense Change</p>
+              <p
+                className={`font-semibold ${expenseChange > 0
+                  ? "text-red-500"
+                  : expenseChange < 0
+                    ? "text-green-600"
+                    : "text-gray-500"
+                  }`}
+              >
+                {expenseChange !== null ? `₹${expenseChange}` : "Not enough data"}
+              </p>
+            </div>
+          </div>
+
+          {/* Status */}
+          <div className="flex justify-between items-center p-3 rounded-lg bg-gray-50">
+            <span className="text-md text-gray-500">Status</span>
+
+            <span
+              className={`text-xs font-medium px-3 py-1 rounded-full ${expenseChange > 0
+                ? "bg-red-100 text-red-600"
+                : "bg-green-100 text-green-600"
+                }`}
+            >
+              {expenseChange > 0 ? "Spending Increased" : "Stable / Improved"}
+            </span>
+          </div>
 
         </div>
-
       </div>
     </div>
   );
