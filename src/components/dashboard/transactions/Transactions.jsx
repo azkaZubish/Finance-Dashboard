@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "../../../context/AppContext";
-import TransactionModal from "./TransactionsModal";
+import TransactionModal from "./TransactionModal";
 import TransactionFilters from "./TransactionFilter";
 import TransactionList from "./TransactionList";
 
