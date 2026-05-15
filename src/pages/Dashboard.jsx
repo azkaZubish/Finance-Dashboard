@@ -2,7 +2,7 @@ import Navbar from "../components/layout/Navbar";
 import HeaderActions from "../components/layout/HeaderActions";
 import SummaryCards from "../components/dashboard/SummaryCards";
 import TimeChart from "../components/dashboard/TimeChart";
-import CategoryChart from "../components/Dashboard/CategoryChart";
+import CategoryChart from "../components/dashboard/CategoryChart";
 import Transactions from "../components/dashboard/transactions/Transactions";
 import Insights from "../components/dashboard/Insights";
 
